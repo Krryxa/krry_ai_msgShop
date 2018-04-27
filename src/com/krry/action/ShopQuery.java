@@ -27,7 +27,12 @@ public class ShopQuery {
 	
 	//识别出来的文字集合
 	private static List<ShopMsg> shopmsg = new ArrayList<>();
-
+	// 文字识别url
+	private static final String idcardIdentificate = "https://aip.baidubce.com/rest/2.0/ocr/v1/receipt";		
+	/**
+     * 线上环境access_token有过期时间， 客户端可自行缓存，过期后重新获取。
+     */
+	private static String accessToken = AccessToken.getAuth();
 	
 	/**
 	 * 循环文件夹里面的文件，并识别文字信息，写入到Excel中
@@ -68,8 +73,6 @@ public class ShopQuery {
 	 */
 	public static void getWordMsg(String filePath){
 		
-		// 身份证识别url
-		String idcardIdentificate = "https://aip.baidubce.com/rest/2.0/ocr/v1/receipt";		
 		String result = null;
 		
 		try {
@@ -81,10 +84,7 @@ public class ShopQuery {
             //检查图片方向true
             String params = "detect_direction=true&" + URLEncoder.encode("image", "UTF-8") + "="
                     + URLEncoder.encode(imgStr, "UTF-8");
-            /**
-             * 线上环境access_token有过期时间， 客户端可自行缓存，过期后重新获取。
-             */
-            String accessToken = AccessToken.getAuth();
+            
             result = HttpUtil.post(idcardIdentificate, accessToken, params);
 
             int count = 0;
@@ -94,8 +94,8 @@ public class ShopQuery {
             JSONObject json = JSONObject.fromObject(result);
             //从json对象得到words_result 变成json数组
             JSONArray arr = (JSONArray) json.get("words_result");
-            
-            for(int i=0;i<arr.size();i++){
+            int len = arr.size();
+            for(int i=0;i<len;i++){
             	//每个数组元素得到words文字信息
             	JSONObject words = JSONObject.fromObject(arr.get(i));
             	String msgWord = (String) words.get("words");
