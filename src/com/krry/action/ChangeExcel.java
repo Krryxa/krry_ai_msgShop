@@ -43,7 +43,7 @@ public class ChangeExcel {
         //将文件保存到指定的位置
         String repl = request.getServletContext().getRealPath("/");
         try {
-            FileOutputStream fos = new FileOutputStream(repl+"/msg/msg.xls");
+            FileOutputStream fos = new FileOutputStream(repl+"/msg/msg.xls",false);//默认是false，覆盖这个文件
             workbook.write(fos);
             System.out.println("写入excel成功");
             fos.close();

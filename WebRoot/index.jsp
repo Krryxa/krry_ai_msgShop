@@ -84,7 +84,7 @@
 						<img alt="点击下载" src="images/download.png" width="20">
 					</a>
 				</span>
-				<span class="right">识别图片文件夹路径：https://www.ainyi.com/krry_ai_msgShop/msgImg</span><br/>
+				<span class="right">识别图片文件夹路径：https://www.ainyi.com/krry_ai_msgShop/msgImg/*.png</span><br/>
 				<span class="left">让用户了解每个天猫店铺的信息</span>
 			</p>
 		</div>
