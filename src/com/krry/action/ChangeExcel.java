@@ -6,13 +6,14 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * 文字写入Excel类
- * @author krry
+ * @author asusaad
  *
  */
 public class ChangeExcel {
@@ -22,7 +23,7 @@ public class ChangeExcel {
         //第一步，创建一个workbook对应一个excel文件
         HSSFWorkbook workbook = new HSSFWorkbook();
         //第二部，在workbook中创建一个sheet对应excel中的sheet
-        HSSFSheet sheet = workbook.createSheet("识别结果");
+        HSSFSheet sheet = workbook.createSheet("表一");
         //第三部，在sheet表中添加表头第0行，老版本的poi对sheet的行列有限制
         HSSFRow row = sheet.createRow(0);
         //第四步，创建单元格，设置表头
@@ -43,11 +44,10 @@ public class ChangeExcel {
         //将文件保存到指定的位置
         String repl = request.getServletContext().getRealPath("/");
         try {
-            FileOutputStream fos = new FileOutputStream(repl+"/msg/msg.xls",false);//默认是false，覆盖这个文件
+            FileOutputStream fos = new FileOutputStream(repl+"/msg/msg.xls");
             workbook.write(fos);
             System.out.println("写入excel成功");
             fos.close();
-            workbook.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

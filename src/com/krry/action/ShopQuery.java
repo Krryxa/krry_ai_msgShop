@@ -53,7 +53,7 @@ public class ShopQuery {
 
 			for(File f:files){
 				//转换图片  上线的时候打开
-				changeJpg(f.getName(),filePath);
+//				changeJpg(f.getName(),filePath);
 				//解析图片文字
 				getWordMsg(filePath+"//"+f.getName());
 			}
@@ -156,7 +156,7 @@ public class ShopQuery {
 	
 	
 	/**
-	 * 将背景透明背景的png图片改成白色背景的png图片
+	 * 将png转换成jpg格式
 	 * @param pathname 文件名
 	 * @param basePath 路径
 	 */
